@@ -1,0 +1,25 @@
+select * from students;
+
+insert into students(name) values('shivani');
+
+delete from students where studentId like "%3%";
+
+use kttestdb_test;
+
+TRUNCATE table students;
+
+drop table students;
+
+create table students(
+    studentId int Not Null AUTO_INCREMENT,
+    firstName varchar(255),
+    lastName varchar(255),
+    phoneNumber varchar(10),
+    email varchar(255),
+    primary key (studentId)
+);
+
+insert into students(firstName,lastName,phoneNumber,email) values('kirtan','bhavsar','9328196976','kirtan.bhavar@gmail.com');
+insert into students(firstName,lastName,phoneNumber,email) values('shivani','kadam','704339525','shivani.kadam@gmail.com');
+
+update students set phoneNumber = '7043339525' where studentId = '2';
