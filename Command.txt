@@ -1,8 +1,16 @@
-select * from students;
+select
+    *
+from
+    students;
 
-insert into students(name) values('shivani');
+insert into
+    students (name)
+values
+    ('shivani');
 
-delete from students where studentId like "%3%";
+delete from students
+where
+    studentId like "%3%";
 
 use kttestdb_test;
 
@@ -10,7 +18,7 @@ TRUNCATE table students;
 
 drop table students;
 
-create table students(
+create table students (
     studentId int Not Null AUTO_INCREMENT,
     firstName varchar(255),
     lastName varchar(255),
@@ -19,7 +27,741 @@ create table students(
     primary key (studentId)
 );
 
-insert into students(firstName,lastName,phoneNumber,email) values('kirtan','bhavsar','9328196976','kirtan.bhavar@gmail.com');
-insert into students(firstName,lastName,phoneNumber,email) values('shivani','kadam','704339525','shivani.kadam@gmail.com');
+insert into
+    students (firstName, lastName, phoneNumber, email)
+values
+    (
+        'kirtan',
+        'bhavsar',
+        '9328196976',
+        'kirtan.bhavar@gmail.com'
+    );
 
-update students set phoneNumber = '7043339525' where studentId = '2';
+insert into
+    students (firstName, lastName, phoneNumber, email)
+values
+    (
+        'shivani',
+        'kadam',
+        '704339525',
+        'shivani.kadam@gmail.com'
+    );
+
+update students
+set
+    phoneNumber = '7043339525'
+where
+    studentId = '2';
+
+use kttestdb_test;
+
+show databases;
+
+show tables;
+
+drop database if exists kttestdb_test;
+
+drop database kttestdb_test;
+
+create database if not exists kttestdb_test1;
+
+create database kttestdb_te
+drop database if exists kttestdb_test1;
+
+insert into
+    students (firstName, lastName, email, phoneNumber)
+values
+    (
+        'parth',
+        'bhrambhatt',
+        '7894561328',
+        'parth.bhrambhatt@gmail.com'
+    ),
+    (
+        'harsh',
+        'sompura',
+        '6458979654',
+        'harsh.sompura@gmail.com'
+    ),
+    (
+        'nishil',
+        'parmar',
+        '7894561239',
+        'nishil.parmar@gmail.com'
+    );
+
+update students
+set
+    email = CASE
+        when studentId = 3 then 'parth.bhrambhatt@gmail.com'
+        when studentId = 4 then 'harsh.sompura@gmail.com'
+        when studentId = 5 then 'nishil.parmar@gmail.com'
+    END
+where
+    studentId in (3, 4, 5);
+
+update students
+set
+    phoneNumber = CASE
+        when studentId = 3 then '8984654894'
+        when studentId = 4 then '8788976513'
+        when studentId = 5 then '4632965125'
+    END
+where
+    studentId in (3, 4, 5);
+
+select
+    *
+from
+    students;
+
+select
+    *
+from
+    courses;
+
+alter table students
+add feeId INT;
+
+use kttestdb_test;
+
+show tables;
+
+create table courses (
+    id int primary key,
+    courseName varchar(100),
+    course_HOD varchar(100)
+);
+
+alter table courses
+modify column id int auto_increment;
+
+select * from courses;
+
+insert into
+    courses (courseName, course_HOD)
+values
+    ('Computer Science', 'Bhagirath Prajapati'),
+    ('Information Technology', 'Sidharth Shah'),
+    ('Electronics', 'Priyanka Puvar'),
+    ('Mechanical', 'Mohit Bhavsar');
+
+select
+    *
+from
+    students;
+
+show tables;
+
+select
+    *
+from
+    courses;
+
+alter table students
+add column course int,
+add constraint addingCourseForeingKey foreign key (course) references courses (id);
+
+select
+    *
+from
+    students;
+
+select
+    *
+from
+    courses;
+
+update students
+set
+    course = CASE
+        When studentId = 1 then 1
+        When studentId = 2 then 4
+        When studentId = 3 then 3
+        When studentId = 4 then 2
+        When studentId = 5 then 1
+    END
+where
+    studentId in (1, 2, 3, 4, 5);
+
+select
+    *
+from
+    courses;
+
+select
+    s.firstName as FirstName,
+    s.lastName as LastName,
+    c.courseName as Course
+from
+    students s
+    join courses c on s.course = c.id;
+
+alter table students
+add column caste ENUM('general', 'st', 'sc', 'obc') default 'general';
+
+update students
+set
+    caste = 'ST'
+where
+    studentId = 5;
+
+alter table students
+add column age int;
+
+select
+    *
+from
+    students;
+
+alter table students
+add constraint age_limit check (age >= 20);
+
+update students
+set
+    age = CASE
+        when studentId = 1 then 21
+        when studentId = 2 then 22
+        when studentId = 3 then 25
+        when studentId = 4 then 22
+        when studentId = 5 then 27
+    end
+where
+    studentId in (1, 2, 3, 4, 5);
+
+update students
+set
+    age = 12
+where
+    studentId = 3;
+
+select distinct
+    caste
+from
+    students;
+
+select
+    *
+from
+    students;
+
+select
+    *
+from
+    students
+where
+    age > 22;
+
+select
+    *
+from
+    students
+where
+    age > 22
+    AND caste = 'st';
+
+select
+    *
+from
+    students
+where
+    age > 22
+    OR caste = 'st';
+
+select
+    *
+from
+    students
+where
+    caste not in('general');
+
+select
+    *
+from
+    students
+where
+    age between 22 and 25;
+
+select
+    *
+from
+    students
+where
+    studentId in (2, 3, 5);
+
+select
+    *
+from
+    students
+where
+    age > 10
+order by
+    age ASC
+limit
+    3;
+
+create table resut (
+    id int PRIMARY KEY AUTO_INCREMENT,
+    marks int not null
+);
+
+show tables;
+
+drop table resut;
+
+create table result (
+    id int PRIMARY KEY AUTO_INCREMENT,
+    marks int not null
+);
+
+select
+    *
+from
+    result;
+
+alter table result
+add column student int;
+
+drop table result;
+
+show tables;
+
+create table result (
+    student int primary key auto_increment,
+    marks int not null
+);
+
+alter table result
+add constraint makingStudentForeignKey foreign key (student) references students (studentId);
+
+select
+    *
+from
+    result;
+
+insert into
+    result
+values
+    (1, 83),
+    (2, 95),
+    (3, 76),
+    (4, 36),
+    (5, 74);
+
+select
+    s.firstName as FirstName,
+    s.lastName as LastName,
+    r.marks,
+    c.courseName as CourseName
+from
+    students s
+    join courses c on s.course = c.id
+    join result r on s.studentId = r.student
+order by
+    marks desc
+limit
+    3;
+
+show tables;
+
+select
+    *
+from
+    result;
+
+select
+    max(r.marks) as marks,
+    s.firstName
+from
+    result r
+    join students s on r.student = s.studentId;
+
+select
+    s.firstName as FirstName,
+    max(r.marks) as marks
+from
+    students s
+    join result r on s.studentId = r.student;
+
+select
+    s.firstName as FirstName,
+    s.lastName as LastName,
+    r.marks
+from
+    result r
+    join students s on r.student = s.studentId
+where
+    r.marks = (
+        select
+            max(marks)
+        from
+            result
+    );
+
+select
+    s.firstName as FirstName,
+    s.lastName as LastName,
+    r.marks as marks
+from
+    result r
+    join students s on r.student = s.studentId
+where
+    r.marks = (
+        select
+            min(marks)
+        from
+            result
+    );
+
+select
+    avg(marks)
+from
+    result;
+
+select
+    count(studentId)
+from
+    students;
+
+select
+    sum(marks)
+from
+    result;
+
+select
+    c.courseName as course
+from
+    courses c
+    join students s on c.id = s.course
+where
+    s.studentId = (
+        select
+            s.studentId
+        from
+            students s
+            left join result r on r.student = s.studentId
+        where
+            r.marks = (
+                select
+                    max(marks)
+                from
+                    result
+            )
+    );
+
+select
+    c.courseName as Course
+from
+    courses c
+    join students s on s.course = c.id
+where
+    s.studentId = (
+        select
+            s.studentId
+        from
+            students s
+            join result r on r.student = s.studentId
+        where
+            r.marks = (
+                select
+                    min(marks)
+                from
+                    result
+            )
+    );
+
+select
+    c.courseName as Course,
+    count(studentId) as Enrollments
+from
+    courses c
+    join students s on s.course = c.id
+group by
+    c.courseName;
+
+insert into
+    students (
+        firstName,
+        lastName,
+        phoneNumber,
+        email,
+        course,
+        age
+    )
+values
+    (
+        'kunj',
+        'patel',
+        6164654654,
+        'kunj.pate@gmail.com',
+        3,
+        25
+    );
+
+insert into
+    result (student, marks)
+values
+    (7, 82);
+
+select
+    s.firstName as FirstName,
+    r.marks as Marks,
+    c.courseName as Course
+from
+    students s
+    join result r on r.student = s.studentId
+    join courses c on s.course = c.id;
+
+select
+    c.courseName as Course,
+    avg(r.marks) as AggregateMarks
+from
+    students s
+    join result r on r.student = s.studentId
+    join courses c on s.course = c.id
+group by
+    c.courseName;
+
+select
+    s.firstName as FirstName,
+    s.lastName as LastName,
+    c.courseName as Stream,
+    r.marks as Marks
+from
+    students s
+    right join result r on 
+    r.student = s.studentId join courses c 
+    on s.course = c.id group by c.courseName;
+
+select s.firstName as Topper, c.courseName as Course, r.marks as Marks 
+from students s join result r
+on s.studentId = r.student
+join courses c 
+on s.course = c.id
+where r.marks in (select max(r.marks)from result r join students s on
+r.student = s.studentId join courses c on s.course = c.id group by c.courseName 
+);
+
+select s.firstName as FirstName, c.courseName as Course, r.marks 
+from students s join result r
+on s.studentId = r.student
+join courses c 
+on s.course = c.id;
+
+select
+    c.courseName as Course,
+    avg(r.marks) as AggregateMarks
+from
+    students s
+    join result r on r.student = s.studentId
+    join courses c on s.course = c.id
+group by
+    c.courseName
+having avg(r.marks) > 75
+    ;
+
+update students set caste = 'obc' where studentId = 4;
+
+insert into
+    students (
+        firstName,
+        lastName,
+        phoneNumber,
+        email,
+        course,
+        age
+    )
+values
+    (
+        'Jaydeep',
+        'Parmar',
+        9646164684,
+        'jaydeep.parmar@gmail.com',
+        2,
+        23
+    );
+
+insert into result values (8,89);
+
+alter table result 
+add constraint addingForeignKey
+foreign key (student) references students(studentId);
+
+alter table result
+drop foreign key addingForeignKey;
+
+alter table result
+add constraint addingForeignKeyWithCascadeDeleteAndUpdate
+foreign key (student) 
+references students(studentId)
+on delete cascade
+on update cascade;
+
+alter table result 
+drop foreign key makingStudentForeignKey;
+
+alter table result
+drop foreign key addingForeignKeyWithCascadeDeleteAndUpdate;
+
+update students set studentId = 36 where studentId = 8;
+-- query successfully cascaded the updation to the result table;
+
+delete from students where studentId = 36;
+-- query successfully cascaded the deletino to the result table;
+
+alter table students
+add column Parents varchar(255) default 'Narendra Modi';
+
+alter table students
+change Parents Guardians varchar(255) default 'Donald Trump';
+
+alter table students
+drop Guardians;
+
+alter table students
+rename to student;
+
+alter table student 
+rename to students;
+
+alter table students
+modify Parents varchar(255) default 'Donald Trump';
+
+delete from students where studentId = 38;
+
+alter table students
+drop Parents;
+
+create table demo(
+     id int PRIMARY KEY AUTO_INCREMENT,
+    name varchar(255)
+);
+
+show tables;
+
+insert into demo(name) VALUES
+('a'),
+('b'),
+('b');
+
+select * from demo;
+
+truncate demo;
+
+drop table demo;
+
+INSERT INTO students (
+    firstName,
+    lastName,
+    phoneNumber,
+    email,
+    course,
+    age
+)
+VALUES    
+    ('neha', 'shah', 9823612354, 'neha.shah@gmail.com', 2, 22),
+    ('jay', 'mehta', 9876543210, 'jay.mehta@gmail.com', 1, 23),
+    ('ruchi', 'doshi', 9901234567, 'ruchi.doshi@gmail.com', 3, 24),
+    ('rahul', 'verma', 9912312312, 'rahul.verma@gmail.com', 4, 26),
+    ('ananya', 'joshi', 9012456789, 'ananya.joshi@gmail.com', 2, 21);
+
+update students set course = NULL where studentId in (40,42);
+
+show tables;
+
+select * from students s inner join courses c on s.course = c.id;
+
+select * from result r left join students s on r.student = s.studentId
+
+select * from result r right join students s on r.student = s.studentId;
+
+select * from courses c left join students s on s.course = c.id;
+
+select * from courses c right join students s on s.course = c.id;
+
+select * from result r left join students s on r.student = s.studentId
+union
+select * from result r right join students s on r.student = s.studentId;
+
+select * from students s left join result r on r.student = s.studentId where r.student is null; 
+
+select * from students s left join courses c on s.course = c.id where s.course is null;
+
+insert into result(student,marks) values (99,12),(100,20);
+
+insert into courses(courseName,course_HOD) values ('Electrical','Dhairya Patel'),('Chemical','Shreya Prajapati');
+
+select * from students s left join courses c on s.course = c.id where c.id is null;
+
+select * from students s right join courses c on s.course = c.id where s.course is null;
+
+select * from students s left join courses c on s.course = c.id where c.id is null
+union all
+select * from students s right join courses c on s.course = c.id where s.course is null;
+
+select * from courses
+union all
+select * from students;
+
+create table employees(
+    id int Primary key auto_increment,
+    name varchar(255),
+    manager int
+);
+
+select name from employees
+union all
+select name from employees;
+
+insert into employees(name,manager) VALUES
+('kirtan',3),
+('prassani',3),
+('radhika',4),
+('ruchir',null);
+
+select * from employees;
+
+delete from employees where id in(2,3);
+
+update employees set id = 3 where id = 5;
+update employees set id = 2 where id = 4;
+update employees set id = 4 where id = 6;
+
+select a.name as employees, b.name as TeamManager from employees a join employees b on b.id = a.manager;
+
+select * from students where age = (select max(age) from students where caste = 'general');
+
+select max(age) from (select * from students where caste = 'general') as generalStudents;
+
+select s.firstName as FirstName, r.marks as TopScore from students s join result r 
+on r.student = s.studentId where r.marks = 
+(select max(r.marks) from students s join result r on r.student = s.studentId 
+where caste = 'general');
+
+with general_score as (
+    select s.firstName as FirstName, r.marks as Scores from students s
+    join result r on r.student = s.studentId
+),
+max_score as (
+    select max(gs.Scores) as TopScore from general_score gs
+)
+select gs.firstName as FirstName, m.TopScore as TopScore
+from general_score gs 
+join max_score m on gs.Scores = m.TopScore;
+
+create view studentsCourses as
+select s.firstName as FirstName, c.courseName as Course 
+from students s left join courses c
+on c.id = s.course where s.course is not null;
+
+select * from studentsCourses;
+
+drop view studentsCourses;
+
+select * from employees;
+
+select * from students;
+
+select * from courses;
+
+select * from result;
